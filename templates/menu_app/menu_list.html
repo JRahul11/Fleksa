@@ -32,6 +32,7 @@
         {% endif %}
     </div>
 </nav>
+<center style="font-size:25px; margin-top:20px;">{{ restaurant_name }}'s Menu</center>
 <div class="grid" style="padding-top: 30;">
     {% for object in object_list %}
     <div class="grid-item">
@@ -79,5 +80,6 @@
         </div>
     </div>
     {% endfor %}
+    <br>
 </div>
 {% endblock %}

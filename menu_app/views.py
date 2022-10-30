@@ -16,6 +16,10 @@ from menu_app.models import Menu
 
 class RestaurantList(ListView):
     model = RestaurantOwner
+    
+    def get_queryset(self):
+        queryset = RestaurantOwner.objects.filter(is_staff=False)
+        return queryset
 
 
 class MenuList(ListView):
@@ -28,7 +32,9 @@ class MenuList(ListView):
     
     def get_context_data(self, **kwargs):
         context = super(MenuList,self).get_context_data(**kwargs)
-        context['restaurant_id'] = self.kwargs['restaurant_id']
+        restaurant = RestaurantOwner.objects.get(id=self.kwargs['restaurant_id'])
+        context['restaurant_id'] = restaurant.id
+        context['restaurant_name'] = restaurant.restaurantName
         if self.request.user.id == self.kwargs['restaurant_id']:
             context['logged_in'] = True
         else:
@@ -71,8 +77,13 @@ class MenuDelete(DeleteView):
 class MenuQRCode(View):
     def get(self, request, **kwargs):
         factory = qrcode.image.svg.SvgImage
-        img = qrcode.make('http://127.0.0.1:8000/' + str(self.kwargs['restaurant_id']), image_factory=factory, box_size=20)
+        url = 'http://127.0.0.1:8000/'
+        img = qrcode.make(url + str(self.kwargs['restaurant_id']), image_factory=factory, box_size=20)
         stream = BytesIO()
         img.save(stream)
-        context = {"svg": stream.getvalue().decode()}
+        restaurant = RestaurantOwner.objects.get(id=self.kwargs['restaurant_id'])
+        context = {
+            "svg": stream.getvalue().decode(),
+            "restaurant_name": restaurant.restaurantName
+        }
         return render(request, "menu_app/qr_code.html", context=context)

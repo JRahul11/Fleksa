@@ -24,6 +24,7 @@
         {% endif %}
     </div>
 </nav>
+<center style="font-size:25px; margin-top:20px;">Available Restaurants</center>
 <div class="grid" style="padding-top: 30;">
     {% for object in object_list %}
     <div class="grid-item">
@@ -31,10 +32,11 @@
             <img class="card-img" src={{ object.image.url }}/>
             <div class="card-content">
                 <h5 class="card-text" style="font-size: 25px; font-weight: bold;">{{ object.restaurantName }}</h5>
-                <a href="{% url 'menu_list' object.id %}" style="text-decoration: none"><button class="card-btn">View Menu <span>&rarr;</span></button></a>
+                <a href="{% url 'menu_list' object.id %}" style="text-decoration: none"><button class="card-btn"> Explore Menu <span>&rarr;</span></button></a>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+<br><br>
 {% endblock %}
