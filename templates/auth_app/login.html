@@ -1,0 +1,34 @@
+{% extends 'authentication.html' %}
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<div class="container forms" id="container">
+  <div class="form sign-in">
+    <form action="#" autocomplete="off" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="header">Sign in to Fleksa</div>
+      <span class="under__social">
+        <a href="{% url 'user_register' %}" class="link signup-link">New User? Register Here</a>
+      </span>
+      <br>
+      <div class="button-input-group">
+        <div class="group input-group">
+          {{ form.username }}
+        </div>
+        <div class="group input-group">
+          {{ form.password }}
+        </div>
+        <br>
+        <div class="group button-group">
+          <button class="signup-btn">
+            <span>Sign in</span>
+          </button>
+        </div>
+        {{ form.errors }}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

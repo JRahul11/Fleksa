@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Menu {% endblock %}
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link href="{% static 'css/list.css' %}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="grid" style="padding-top: 30;">
+    {% for object in object_list %}
+    <div class="grid-item">
+        <div class="card">
+            <img class="card-img" src={{ object.itemImage.url }}/>
+            <div class="card-content">
+                <h5 class="card-text" style="font-size: 20px; font-weight: bold;">{{ object.itemName }}</h5>
+                <p class="card-text" style="font-size: 16px">
+                    Price: ₹{{ object.itemPrice }}
+                </p>
+                <p class="card-text">
+                    Category: {{ object.itemCategory }}
+                </p>
+                <p class="card-text">
+                    Description: {{ object.itemDescription }}
+                </p>
+                <a href="#" style="text-decoration: none"><button class="card-btn">Order Now
+                        <span>&rarr;</span></button></a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="grid-item" style="width: 320px;">
+        <div class="card">
+            <img class="card-img" src={% static 'images/foodCooking.jpg' %} />
+            <div class="card-content">
+                <h5 class="card-text" style="font-size: 18px">Restaurant is preparing their menu ✍️</h5>
+                <p class="card-text">
+                    Visit again after a few days ⌛
+                </p>
+                <a href="{% url 'restaurant_list' %}" style="text-decoration: none"><button class="card-btn">Browse
+                        Other Restaurants <span>&rarr;</span></button></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

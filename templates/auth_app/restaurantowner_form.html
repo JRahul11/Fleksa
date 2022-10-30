@@ -1,0 +1,44 @@
+{% extends 'authentication.html' %}
+{% load static %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+<div class="container forms" id="container">
+    <div class="form sign-in">
+        <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
+            {% csrf_token %}
+            <div class="header">Sign Up for Fleksa</div>
+            <span class="under__social">
+                <a href="{% url 'user_login' %}" class="link signin-link">Already Registered? Login Here
+                </a>
+            </span>
+            <br>
+            <div class="button-input-group">
+                <div class="group input-group">
+                    {{ form.restaurantName }}
+                </div>
+                <div class="group input-group">
+                    {{ form.email }}
+                </div>
+                <div class="group input-group">
+                    {{ form.password }}
+                </div>
+                <div class="alert-text signup__alert">
+                    <span class="help__text">At least 4 character</span>
+                </div>
+                <div style="margin-left:25px">
+                    <label for="formFile" class="form-label">Upload Restaurant Image</label>
+                    {{ form.image }}
+                </div>
+                <br>
+                <div class="group button-group">
+                    <button class="signup-btn">
+                        <span>Sign Up</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
