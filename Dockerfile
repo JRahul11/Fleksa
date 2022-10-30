@@ -22,4 +22,4 @@ RUN python manage.py collectstatic
 # CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "fleksa.wsgi:application"]
 
 # For Hosting
-CMD gunicorn banao_project.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn fleksa.wsgi:application --bind 0.0.0.0:$PORT
