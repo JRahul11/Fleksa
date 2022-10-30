@@ -8,6 +8,22 @@
 {% endblock %}
 
 {% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 20px;">
+    <a class="navbar-brand" href="{% url 'restaurant_list' %}" style="font-size: 27px;">Fleksa</a>
+    
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        {% if user.is_authenticated %}
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" style="margin-left:650px;" href={% url 'user_logout' %}>Logout</a>
+        </div>
+        {% else %}
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" style="margin-left:600px;" href={% url 'user_login' %}>Log In</a>
+            <a class="nav-item nav-link" style="margin-left:50px;"href={% url 'user_register' %}>Sign Up</a>
+        </div>
+        {% endif %}
+    </div>
+</nav>
 <div class="grid" style="padding-top: 30;">
     {% for object in object_list %}
     <div class="grid-item">

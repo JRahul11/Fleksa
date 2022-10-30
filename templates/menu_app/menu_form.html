@@ -1,7 +1,64 @@
-<html>
-<form method="POST" enctype="multipart/form-data">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Add Item {% endblock %}
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link href="{% static 'css/form.css' %}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data" autocomplete="off">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <div class="container">
+        <div class="form-part">
+            {% if add_page %}
+            <h2>Add New Menu Item</h2>
+            {% else %}
+            <h2>Update Menu Item</h2>
+            {% endif %}
+
+            <div class="form-inputs">
+
+                <div class="text-input">
+                    <label for="email">Item Name</label>
+                    {{ form.itemName }}
+                </div>
+
+                <div class="text-input">
+                    <label for="country">Item Category</label>
+                    {{ form.itemCategory }}
+                </div>
+
+                <div class="text-input">
+                    <label for="email">Item Price</label>
+                    {{ form.itemPrice }}
+                </div>
+
+                <div class="text-input">
+                    <label for="email">Item Description</label>
+                    {{ form.itemDescription }}
+                </div>
+
+                <div class="text-input">
+                    <label for="email">Item Image</label>
+                    {{ form.itemImage }}
+                </div>
+
+                <center>
+                    <div class="group button-group">
+                        <button class="signup-btn">
+                            {% if add_page %}
+                            <span style="margin: 30px">Add Item</span>
+                            {% else %}
+                            <span style="margin: 30px">Update Item</span>
+                            {% endif %}
+                        </button>
+                </center>
+            </div>
+        </div>
+    </div>
+    </div>
 </form>
-</html>
+{% endblock %}

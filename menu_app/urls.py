@@ -14,4 +14,6 @@ urlpatterns = [
     
     path('<int:restaurant_id>/deleteItem/<int:pk>', MenuDelete.as_view(), name='menu_delete'),
     
+    path('<int:restaurant_id>/qrcode', MenuQRCode.as_view(), name='menu_qrcode'),
+    
 ]

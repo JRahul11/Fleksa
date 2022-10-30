@@ -1,8 +1,8 @@
+from django import forms
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
-from django import forms
 
 from auth_app.forms import RegisterForm
 from auth_app.models import RestaurantOwner
@@ -13,13 +13,12 @@ class UserRegisterView(FormView):
     form_class = RegisterForm
     success_url = reverse_lazy('user_login')
     template_name = 'auth_app/restaurantowner_form.html'
-        
+    
     def form_valid(self, form):
         restaurantName = form.data['restaurantName']
         email = form.data['email']
         password = make_password(form.data['password'])
         image = self.request.FILES['image']
-        
         RestaurantOwner.objects.create(
             restaurantName=restaurantName, 
             email=email, 

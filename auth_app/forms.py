@@ -12,7 +12,7 @@ class LoginForm(forms.ModelForm):
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = RestaurantOwner
-        fields = '__all__'
+        fields = ['restaurantName', 'email', 'password', 'image']
         widgets = {
             'restaurantName': forms.TextInput(attrs={'placeholder':'Restaurant Name'}),
             'email': forms.TextInput(attrs={'placeholder':'Email'}),

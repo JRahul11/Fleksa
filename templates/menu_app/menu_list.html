@@ -8,11 +8,35 @@
 {% endblock %}
 
 {% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: 20px;">
+    <a class="navbar-brand" href="{% url 'restaurant_list' %}" style="font-size: 27px;">Fleksa</a>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        {% if user.is_authenticated %}
+            {% if logged_in %}
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" style="margin-left:550px;" href="{% url 'menu_create' restaurant_id %}">Add New Item</a>
+                <a class="nav-item nav-link" style="margin-left:50px;" href="{% url 'menu_qrcode' restaurant_id %}">Generate QR Code</a>
+                <a class="nav-item nav-link" style="margin-left:50px;" href={% url 'user_logout' %}>Logout</a>
+            </div>
+            {% else %}
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" style="margin-left:650px;" href={% url 'user_logout' %}>Logout</a>
+            </div>
+            {% endif %}
+        {% else %}
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" style="margin-left:600px;" href={% url 'user_login' %}>Log In</a>
+            <a class="nav-item nav-link" style="margin-left:50px;" href={% url 'user_register' %}>Sign Up</a>
+        </div>
+        {% endif %}
+    </div>
+</nav>
 <div class="grid" style="padding-top: 30;">
     {% for object in object_list %}
     <div class="grid-item">
         <div class="card">
-            <img class="card-img" src={{ object.itemImage.url }}/>
+            <img class="card-img" src={{ object.itemImage.url }} />
             <div class="card-content">
                 <h5 class="card-text" style="font-size: 20px; font-weight: bold;">{{ object.itemName }}</h5>
                 <p class="card-text" style="font-size: 16px">
@@ -26,6 +50,17 @@
                 </p>
                 <a href="#" style="text-decoration: none"><button class="card-btn">Order Now
                         <span>&rarr;</span></button></a>
+                {% if logged_in %}
+                <br>
+                <div class="control-group">
+                    <div class="controls align-right" style="text-align: right;">
+                        <a id="address" class="update btn btn-inverse btn-medium push-top"
+                            href="{% url 'menu_update' restaurant_id object.id %}" style="font-size:17px;">Update</a>
+                        <a class="delete_add btn btn-inverse btn-medium push-top"
+                            href="{% url 'menu_delete' restaurant_id object.id %}" style="font-size:17px">Delete</a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
