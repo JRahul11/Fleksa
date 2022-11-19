@@ -1,9 +1,13 @@
 
+import os
 from pathlib import Path
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-rk=+@!mxi9sy5xv*7!s+ct@zcvbqv32_p*#km&=g*%$6ra*3vk'
-DEBUG = True
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -56,6 +60,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": env('ENGINE'),
+#         "NAME": env('NAME'),
+#         "USER": env('USER'),
+#         "PASSWORD": env('PASSWORD'),
+#         "HOST": env('HOST'),
+#         "PORT": env('PORT'),
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

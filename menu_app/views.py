@@ -77,8 +77,8 @@ class MenuDelete(DeleteView):
 class MenuQRCode(View):
     def get(self, request, **kwargs):
         factory = qrcode.image.svg.SvgImage
-        # url = 'http://127.0.0.1:8000/'
-        url = 'https://fleksa-jrahul.herokuapp.com/'
+        url = 'http://127.0.0.1:8000/'
+        # url = 'https://fleksa-jrahul.herokuapp.com/'
         img = qrcode.make(url + str(self.kwargs['restaurant_id']), image_factory=factory, box_size=20)
         stream = BytesIO()
         img.save(stream)
