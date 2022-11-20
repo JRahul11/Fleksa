@@ -6,8 +6,8 @@ env = environ.Env()
 environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
+SECRET_KEY = 'django-insecure-rk=+@!mxi9sy5xv*7!s+ct@zcvbqv32_p*#km&=g*%$6ra*3vk'
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -61,16 +61,16 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": env('ENGINE'),
-#         "NAME": env('NAME'),
-#         "USER": env('USER'),
-#         "PASSWORD": env('PASSWORD'),
-#         "HOST": env('HOST'),
-#         "PORT": env('PORT'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'MjCuAklEXtqc6uxZEpVj',
+        'HOST': 'containers-us-west-114.railway.app',
+        'PORT': '6932',
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
